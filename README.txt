@@ -16,4 +16,4 @@
 `pip install torch torchvision numpy matplotlib scikit-learn`
 
 ### Εκτιμώμενος χρόνος εκτέλεσης σε GPU:
-~25 λεπτά
+~22 λεπτά
