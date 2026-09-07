@@ -3,6 +3,9 @@
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python)
 ![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red?logo=pytorch)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?logo=scikit-learn)
+![Torchvision](https://img.shields.io/badge/Torchvision-Computer%20Vision-red?logo=pytorch)
+![CUDA](https://img.shields.io/badge/CUDA-GPU%20Acceleration-76B900?logo=nvidia)
+![Transfer Learning](https://img.shields.io/badge/Transfer%20Learning-ResNet18-success)
 
 ## Overview
 
