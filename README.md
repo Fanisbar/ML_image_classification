@@ -30,9 +30,9 @@ The models are evaluated using accuracy, macro F1-score, loss curves, and confus
 
 ## Dataset
 
-The project uses the `wikiart_hw2.npz` dataset. It contains RGB images resized to `32 × 32` pixels and their corresponding class labels.
+The project uses the `wikiart_hw2.npz` dataset. The repository includes it as the compressed archive `wikiart_hw2.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2.npz` file is available. It contains RGB images resized to `32 × 32` pixels and their corresponding class labels.
 
-The dataset file should be placed in the project directory or its path should be updated in the notebook.
+After extraction, the resulting `.npz` file should be placed in the project directory, unless its path is updated in the notebook.
 
 For convenient inspection, `dataset_extractor.py` can be used to convert the dataset’s raw pixel arrays into viewable PNG images, organized into folders by artistic movement.
 
@@ -81,6 +81,19 @@ The experiments produced the following representative results:
 | Frozen ResNet18 with linear probe | 75.07% | 0.7493 |
 
 The frozen ResNet18 achieved the best performance, despite only training its final linear classification layer. This demonstrates the usefulness of general visual representations learned from ImageNet.
+
+### Best Custom CNN Configuration
+
+The best-performing configuration of our custom CNN model used regularization and data augmentation. Its configuration was:
+
+- Four convolutional blocks with channel sizes `3 → 16 → 32 → 64 → 128`; each block used a `5 × 5` convolution, Batch Normalization, ReLU activation, and `2 × 2` max pooling.
+- A fully connected classification head with layer sizes `512 → 1024 → 256 → 32 → 4`.
+- Dropout with probability `0.3` between the fully connected layers.
+- Adam optimizer with learning rate `0.001` and weight decay `1e-4`.
+- Cosine Annealing learning-rate scheduling over `60` epochs.
+- Data augmentation using random horizontal flips, random crops with padding, and mild brightness and contrast changes.
+
+This configuration achieved `70.43%` test accuracy and a `0.7055` test macro F1-score.
 
 ## Topics Investigated
 
