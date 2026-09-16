@@ -76,24 +76,24 @@ The experiments produced the following representative results:
 
 | Model | Test Accuracy | Test F1 Macro |
 | :--- | :---: | :---: |
-| Fully Connected Network | 48.92% | 0.4883 |
-| Custom CNN with regularization and augmentation | 70.43% | 0.7055 |
+| Fully Connected Network | 48.93% | 0.4883 |
+| Custom CNN with regularization and augmentation | 71.00% | 0.7099 |
 | Frozen ResNet18 with linear probe | 75.07% | 0.7493 |
 
 The frozen ResNet18 achieved the best performance, despite only training its final linear classification layer. This demonstrates the usefulness of general visual representations learned from ImageNet.
 
 ### Best Custom CNN Configuration
 
-The best-performing configuration of our custom CNN model used regularization and data augmentation. Its configuration was:
+The best-performing configuration of our custom CNN model used regularization and data augmentation. This configuration was identified through hyperparameter tuning via grid search. Its specifications were:
 
 - Four convolutional blocks with channel sizes `3 → 16 → 32 → 64 → 128`; each block used a `5 × 5` convolution, Batch Normalization, ReLU activation, and `2 × 2` max pooling.
 - A fully connected classification head with layer sizes `512 → 1024 → 256 → 32 → 4`.
-- Dropout with probability `0.3` between the fully connected layers.
-- Adam optimizer with learning rate `0.001` and weight decay `1e-4`.
+- Dropout with probability `0.2` between the fully connected layers.
+- Adam optimizer with initial learning rate `0.001` and weight decay `~3.16×1e-4 (0.000316227766)`.
 - Cosine Annealing learning-rate scheduling over `60` epochs.
 - Data augmentation using random horizontal flips, random crops with padding, and mild brightness and contrast changes.
 
-This configuration achieved `70.43%` test accuracy and a `0.7055` test macro F1-score.
+This configuration achieved `71.00%` test accuracy and a `0.7099` test macro F1-score.
 
 ## Topics Investigated
 
@@ -111,6 +111,7 @@ The project examines:
 - Dropout and weight decay
 - Data augmentation
 - Transfer learning with ResNet18
+- Hyperparameter tuning via grid search
 - Filter and activation-map visualization
 - CPU and GPU training-time comparison
 
@@ -121,8 +122,9 @@ All experiments were run on a Google Colab session using a T4 GPU. CPU-based exp
 
 ### Estimated GPU execution time
 
-~22 minutes
+~106 minutes
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
 
-*Developed as coursework for EP08:Pattern Recognition - Machine Learning, course of DIT, UoA.*
+*Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
+*Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
