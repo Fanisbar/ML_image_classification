@@ -30,7 +30,7 @@ The models are evaluated using accuracy, macro F1-score, loss curves, and confus
 
 ## Dataset
 
-The project uses the `wikiart_hw2.npz` dataset. The repository includes it as the compressed archive `wikiart_hw2.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2.npz` file is available. It contains RGB images resized to `32 × 32` pixels and their corresponding class labels.
+The project uses a **balanced** subset of the [WikiArt](https://www.kaggle.com/datasets/steubk/wikiart) dataset. The repository includes it as the compressed archive `wikiart_hw2_balanced.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2_balanced.npz` file is available. It contains 13228 (4×3307) RGB images resized to `32 × 32` pixels and their corresponding class labels.
 
 After extraction, the resulting `.npz` file should be placed in the project directory, unless its path is updated in the notebook.
 
@@ -54,9 +54,9 @@ or
 ## How to Run
 
 1. Install the required dependencies.
-2. Place `wikiart_hw2.npz` in the current data directory.
+2. Place `wikiart_hw2_balanced.npz` in the current data directory.
 3. Open the notebook: `main.ipynb`.
-4. Update the dataset path if necessary. For local execution, uncomment the direct-loading line for `wikiart_hw2.npz`.
+4. Update the dataset path if necessary. For local execution, uncomment the direct-loading line for `wikiart_hw2_balanced.npz`.
 5. Run the notebook cells in order.
 
 The notebook includes data exploration, preprocessing, model training, evaluation, visualization, optimizer comparisons, regularization experiments, data augmentation, and transfer learning.
@@ -76,24 +76,24 @@ The experiments produced the following representative results:
 
 | Model | Test Accuracy | Test F1 Macro |
 | :--- | :---: | :---: |
-| Fully Connected Network | 48.93% | 0.4883 |
-| Custom CNN with regularization and augmentation | 71.00% | 0.7099 |
-| Frozen ResNet18 with linear probe | 75.07% | 0.7493 |
+| Fully Connected Feedforward Network | 55.33% | 0.5544 |
+| Custom CNN with regularization and augmentation | 73.60% | 0.7365 |
+| Frozen ResNet18 with linear probe | 76.40% | 0.7643 |
 
 The frozen ResNet18 achieved the best performance, despite only training its final linear classification layer. This demonstrates the usefulness of general visual representations learned from ImageNet.
 
 ### Best Custom CNN Configuration
 
-The best-performing configuration of our custom CNN model used regularization and data augmentation. This configuration was identified through hyperparameter tuning via grid search. Its specifications were:
+The best-performing configuration of our custom CNN model used tuned regularization and data augmentation. This configuration was identified through hyperparameter tuning via grid search. Its specifications were:
 
 - Four convolutional blocks with channel sizes `3 → 16 → 32 → 64 → 128`; each block used a `5 × 5` convolution, Batch Normalization, ReLU activation, and `2 × 2` max pooling.
 - A fully connected classification head with layer sizes `512 → 1024 → 256 → 32 → 4`.
 - Dropout with probability `0.2` between the fully connected layers.
-- Adam optimizer with initial learning rate `0.001` and weight decay `~3.16×1e-4 (0.000316227766)`.
+- Adam optimizer with initial learning rate `0.001` and weight decay `0.0001`.
 - Cosine Annealing learning-rate scheduling over `60` epochs.
 - Data augmentation using random horizontal flips, random crops with padding, and mild brightness and contrast changes.
 
-This configuration achieved `71.00%` test accuracy and a `0.7099` test macro F1-score.
+This configuration achieved `73.60%` test accuracy and a `0.7365` test macro F1-score.
 
 ## Topics Investigated
 
@@ -103,7 +103,7 @@ The project examines:
 - Stratified train-validation-test splitting
 - Feed-forward neural networks
 - Convolutional neural networks
-- Padding and max pooling
+- Padding and max-pooling
 - ReLU activations
 - Batch Normalization
 - SGD, SGD with momentum, Adam, RMSprop, and AdamW
@@ -122,7 +122,7 @@ All experiments were run on a Google Colab session using a T4 GPU. CPU-based exp
 
 ### Estimated GPU execution time
 
-~106 minutes
+~329 minutes
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
 
