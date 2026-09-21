@@ -1,4 +1,4 @@
-wikiart_hw2.npz
+*.npz
 *.pth
 examples/
 wikiart_images/
