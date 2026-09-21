@@ -30,7 +30,7 @@ The models are evaluated using accuracy, macro F1-score, loss curves, and confus
 
 ## Dataset
 
-The project uses a **balanced** subset of the [WikiArt](https://www.kaggle.com/datasets/steubk/wikiart) dataset. The repository includes it as the compressed archive `wikiart_hw2_balanced.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2_balanced.npz` file is available. It contains 13228 (4×3307) RGB images resized to `32 × 32` pixels and their corresponding class labels.
+The project uses a **balanced** subset of the [WikiArt](https://www.kaggle.com/datasets/steubk/wikiart) dataset (Steubk, 2023, available on Kaggle). The repository includes it as the compressed archive `wikiart_hw2_balanced.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2_balanced.npz` file is available. It contains 13228 (4×3307) RGB images resized to `32 × 32` pixels and their corresponding class labels.
 
 After extraction, the resulting `.npz` file should be placed in the project directory, unless its path is updated in the notebook.
 
@@ -80,7 +80,7 @@ The experiments produced the following representative results:
 | Custom CNN with regularization and augmentation | 73.60% | 0.7365 |
 | Frozen ResNet18 with linear probe | 76.40% | 0.7643 |
 
-The frozen ResNet18 achieved the best performance, despite only training its final linear classification layer. This demonstrates the usefulness of general visual representations learned from ImageNet.
+The frozen ResNet18 achieved the highest test performance among the evaluated approaches, suggesting that ImageNet-pretrained visual representations can transfer effectively to this artistic movement classification task.
 
 ### Best Custom CNN Configuration
 
