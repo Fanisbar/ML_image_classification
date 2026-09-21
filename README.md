@@ -120,11 +120,14 @@ The project examines:
 
 All experiments were run on a Google Colab session using a T4 GPU. CPU-based experiments used the CPU available in the respective Colab session for comparison.
 
-### Estimated GPU execution time
+## Estimated GPU execution time
 
 ~329 minutes
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
+
+## Future Development
+- **Model Saving/Loading:** Add functionality to save model weights and configurations to a file for future use. This will allow users to run inference with the best models without requiring full training from scratch.
 
 *Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
 *Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
