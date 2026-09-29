@@ -19,12 +19,14 @@ This project investigates neural-network-based image classification for identify
 The project compares several approaches, gradually increasing the architectural complexity:
 
 1. A fully connected feed-forward neural network using flattened pixels.
-2. A convolutional neural network without pooling and activation functions.
+2. A convolutional neural network without padding, pooling or activation functions.
 3. A CNN with padding and max pooling.
 4. A CNN with ReLU activations.
-5. A CNN with Batch Normalization.
-6. Regularization and data augmentation experiments.
-7. A frozen pre-trained ResNet18 with a trainable linear classification layer.
+5. Comparison of five optimizers (SGD, SGD with momentum, Adam, RMSprop, AdamW) on the ReLU CNN.
+6. A cosine annealing learning-rate scheduler applied to the best optimizer.
+7. A CNN with Batch Normalization, trained with the best optimizer and the scheduler.
+8. Regularization (dropout, weight decay) and data augmentation experiments, including grid-search tuning.
+9. A frozen pre-trained ResNet18 with a trainable linear classification layer.
 
 The models are evaluated using accuracy, macro F1-score, loss curves, and confusion matrices.
 
@@ -95,6 +97,12 @@ The best-performing configuration of our custom CNN model used tuned regularizat
 
 This configuration achieved `73.60%` test accuracy and a `0.7365` test macro F1-score.
 
+## Model Selection and Checkpointing
+
+Model selection is always based on the validation set: after every epoch the validation macro F1-score is computed and the weights of the best epoch are kept. The test set is used only once, for the final evaluation.
+
+The feedforward network, the three CNN variants of the architecture comparison, the tuned custom CNN and the frozen ResNet18 are saved to disk as PyTorch `state_dict` files (`.pth`). During the optimizer comparison, the scheduler and Batch Normalization experiments and the grid search, the best weights of each run are kept in memory (`copy.deepcopy(model.state_dict())`). Of these, only the winning grid-search configuration is written to disk, so it can be evaluated without retraining and also for future use.
+
 ## Topics Investigated
 
 The project examines:
@@ -111,6 +119,7 @@ The project examines:
 - Dropout and weight decay
 - Data augmentation
 - Transfer learning with ResNet18
+- Best-checkpoint selection and model weight saving (state_dict)
 - Hyperparameter tuning via grid search
 - Filter and activation-map visualization
 - CPU and GPU training-time comparison
@@ -120,14 +129,11 @@ The project examines:
 
 All experiments were run on a Google Colab session using a T4 GPU. CPU-based experiments used the CPU available in the respective Colab session for comparison.
 
-## Estimated GPU execution time
+## Estimated total execution time
 
-~329 minutes
+5h 39m 46.72s
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
-
-## Future Development
-- **Model Saving/Loading:** Add functionality to save model weights and configurations to a file for future use. This will allow users to run inference with the best models without requiring full training from scratch.
 
 *Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
 *Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
