@@ -135,6 +135,14 @@ All experiments were run on a Google Colab session using a T4 GPU. CPU-based exp
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
 
+*Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
+*Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
+
+
+
+
+
+
 
 
 
@@ -145,6 +153,3 @@ Run one last time
 Update times
 Update README.md
 Update dataset zip file on GitHub
-
-*Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
-*Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
