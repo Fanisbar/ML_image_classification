@@ -2,7 +2,7 @@ import numpy as np
 from pathlib import Path
 from PIL import Image
 
-data = np.load("wikiart_hw2.npz", allow_pickle=True)
+data = np.load("wikiart_balanced.npz", allow_pickle=True)
 
 X = data["X"] # (5400, 32, 32, 3)
 y = data["y"]
