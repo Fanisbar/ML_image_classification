@@ -32,7 +32,7 @@ The models are evaluated using accuracy, macro F1-score, loss curves, and confus
 
 ## Dataset
 
-The project uses a **balanced** subset of the [WikiArt](https://www.kaggle.com/datasets/steubk/wikiart) dataset (Steubk, 2023, available on Kaggle). The repository includes it as the compressed archive `wikiart_hw2_balanced.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_hw2_balanced.npz` file is available. It contains 13228 (4×3307) RGB images resized to `32 × 32` pixels and their corresponding class labels.
+The project uses a **balanced** subset of the [WikiArt](https://www.kaggle.com/datasets/steubk/wikiart) dataset (Steubk, 2023, available on Kaggle). The repository includes it as the compressed archive `wikiart_balanced.npz.zip`, which should be extracted before running the notebook so that the required `wikiart_balanced.npz` file is available. It contains 13228 (4×3307) RGB images resized to `32 × 32` pixels and their corresponding class labels.
 
 After extraction, the resulting `.npz` file should be placed in the project directory, unless its path is updated in the notebook.
 
@@ -44,21 +44,16 @@ python dataset_extractor.py
 ```
 
 ## Dependencies
-`pip install torch`  
-`pip install torchvision`  
-`pip install numpy`  
-`pip install matplotlib`  
-`pip install seaborn`  
-`pip install scikit-learn`  
+`pip install numpy>=1.24 torch>=2.0 torchvision>=0.15 matplotlib>=3.7 scikit-learn>=1.2 seaborn>=0.12`  
 or  
-`pip install torch torchvision numpy matplotlib seaborn scikit-learn`
+`pip install -r requirements.txt`
 
 ## How to Run
 
 1. Install the required dependencies.
-2. Place `wikiart_hw2_balanced.npz` in the current data directory.
+2. Place `wikiart_balanced.npz` in the current data directory.
 3. Open the notebook: `main.ipynb`.
-4. Update the dataset path if necessary. For local execution, uncomment the direct-loading line for `wikiart_hw2_balanced.npz`.
+4. Update the dataset path if necessary. For local execution, uncomment the direct-loading line for `wikiart_balanced.npz`.
 5. Run the notebook cells in order.
 
 The notebook includes data exploration, preprocessing, model training, evaluation, visualization, optimizer comparisons, regularization experiments, data augmentation, and transfer learning.
