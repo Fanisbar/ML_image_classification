@@ -73,9 +73,9 @@ The experiments produced the following representative results:
 
 | Model | Test Accuracy | Test F1 Macro |
 | :--- | :---: | :---: |
-| Fully Connected Feedforward Network | 55.33% | 0.5544 |
-| Custom CNN with regularization and augmentation | 73.60% | 0.7365 |
-| Frozen ResNet18 with linear probe | 76.40% | 0.7643 |
+| Feedforward baseline | 55.33% | 0.5544 |
+| Tuned custom CNN | 75.60% | 0.7564 |
+| Frozen ResNet18 with linear probe | 77.93% | 0.7798 |
 
 The frozen ResNet18 achieved the highest test performance among the evaluated approaches, suggesting that ImageNet-pretrained visual representations can transfer effectively to this artistic movement classification task.
 
@@ -85,12 +85,12 @@ The best-performing configuration of our custom CNN model used tuned regularizat
 
 - Four convolutional blocks with channel sizes `3 → 16 → 32 → 64 → 128`; each block used a `5 × 5` convolution, Batch Normalization, ReLU activation, and `2 × 2` max pooling.
 - A fully connected classification head with layer sizes `512 → 1024 → 256 → 32 → 4`.
-- Dropout with probability `0.2` between the fully connected layers.
-- Adam optimizer with initial learning rate `0.001` and weight decay `0.0001`.
+- Dropout with probability `0.0` (no dropout) between the fully connected layers.
+- AdamW optimizer with initial learning rate `0.001` and weight decay `0.1`.
 - Cosine Annealing learning-rate scheduling over `60` epochs.
 - Data augmentation using random horizontal flips, random crops with padding, and mild brightness and contrast changes.
 
-This configuration achieved `73.60%` test accuracy and a `0.7365` test macro F1-score.
+This configuration achieved `75.60%` test accuracy and a `0.7564` test macro F1-score. The validation landscape of the grid was essentially flat (all top configurations within ~0.006 macro F1), so the selected configuration performs on par with augmentation alone.
 
 ## Model Selection and Checkpointing
 
@@ -126,25 +126,9 @@ All experiments were run on a Google Colab session using a T4 GPU. CPU-based exp
 
 ## Estimated total execution time
 
-5h 39m 46.72s
+2h 33m 38.84
 
 Actual runtime depends on the available hardware, PyTorch version, CUDA configuration, and whether all experiments are executed.
 
 *Initially developed as coursework for EP08: Pattern Recognition - Machine Learning, course of DIT, UoA.*  
 *Extensively tuned, optimized, and expanded with hyperparameter tuning, regularization studies, larger dataset and other experiments.*
-
-
-
-
-
-
-
-
-
-
-
-TODO:
-Run one last time
-Update times
-Update README.md
-Update dataset zip file on GitHub
